@@ -3,6 +3,7 @@
   hosts: dns_servers
   become: yes
   vars_files:
+    - ../vault.yml
     - ../global_vars/all.yml
   roles:
     - role: roles/common/dns_server

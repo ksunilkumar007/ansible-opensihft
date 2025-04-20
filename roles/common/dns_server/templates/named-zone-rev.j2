@@ -7,15 +7,16 @@ $TTL 86400
         86400 )   ; Minimum TTL
 
 ; Name servers
-    IN  NS  ns1.{{ reverse_zone }}.
-    IN  NS  ns2.{{ reverse_zone }}.
+{% for node in dns_records.loadbalancer_nodes %}
+    IN  NS  ns{{ loop.index }}.{{ reverse_zone }}.
+{% endfor %}
 
 ; A records for name servers
-ns1.{{ reverse_zone }}.  IN  A  {{ ns1_ip }}
-ns2.{{ reverse_zone }}.  IN  A  {{ ns2_ip }}
+{% for node in dns_records.loadbalancer_nodes %}
+ns{{ loop.index }}.{{ reverse_zone }}.  IN  A  {{ node.ip }}
+{% endfor %}
 
 ; PTR records for reverse lookup
 {% for ip, fqdn in reverse_records.items() %}
 {{ ip }} IN PTR {{ fqdn }}.
 {% endfor %}
-
