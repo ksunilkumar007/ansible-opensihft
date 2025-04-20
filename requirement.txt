@@ -1,0 +1,5 @@
+ansible
+jinja2
+pyyaml
+requests
+#sshpass -- not python package install using yum

@@ -1,0 +1,35 @@
+$TTL 86400
+@   IN  SOA  ns1.{{ zone_name }}. admin.{{ zone_name }}. (
+        20220101  ; Serial
+        3600      ; Refresh
+        1800      ; Retry
+        1209600   ; Expire
+        86400 )   ; Minimum TTL
+
+; Name servers
+    IN  NS  ns1.{{ zone_name }}.
+    IN  NS  ns2.{{ zone_name }}.
+
+; A records for name servers
+ns1 IN A 10.1.1.106
+ns2 IN A 10.1.1.106
+
+; A records for loadbalancer nodes
+{% for record in dns_records.loadbalancer_nodes %}
+{{ record.name }}.{{ zone_name }}. IN A {{ record.ip }}
+{% endfor %}
+
+; A records for master nodes
+{% for record in dns_records.master_nodes %}
+{{ record.name }}.{{ zone_name }}. IN A {{ record.ip }}
+{% endfor %}
+
+; A records for infra nodes
+{% for record in dns_records.infra_nodes %}
+{{ record.name }}.{{ zone_name }}. IN A {{ record.ip }}
+{% endfor %}
+
+; A records for worker nodes
+{% for record in dns_records.worker_nodes %}
+{{ record.name }}.{{ zone_name }}. IN A {{ record.ip }}
+{% endfor %}

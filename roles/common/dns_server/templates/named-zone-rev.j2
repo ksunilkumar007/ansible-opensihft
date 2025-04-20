@@ -1,0 +1,17 @@
+$TTL 86400
+@   IN  SOA  ns1.{{ reverse_zone }}. admin.{{ reverse_zone }}. (
+        20220101  ; Serial
+        3600      ; Refresh
+        1800      ; Retry
+        1209600   ; Expire
+        86400 )   ; Minimum TTL
+
+; Name servers
+    IN  NS  ns1.{{ reverse_zone }}.
+    IN  NS  ns2.{{ reverse_zone }}.
+
+; PTR records for reverse lookup
+{% for ip, fqdn in reverse_records.items() %}
+{{ ip }} IN PTR {{ fqdn }}.
+{% endfor %}
+

@@ -1,0 +1,21 @@
+domain_name: "openshift.local"
+dns_forwarders:
+  - "8.8.8.8"
+  - "8.8.4.4"
+zone_name: "openshift.local"
+zone_file: "/var/named/openshift.local.db"
+reverse_zone: "1.1.10.in-addr.arpa"
+reverse_zone_file: "/var/named/10.1.1.rev"
+dns_records:
+  loadbalancer_nodes:
+    - name: "slb1"
+      ip: "10.1.1.104"
+    - name: "slb2"
+      ip: "10.1.1.105"
+  infra_nodes: []
+  worker_nodes: []
+  master_nodes: []
+reverse_records:
+  "104": "slb1.openshift.local"
+  "105": "slb2.openshift.local"
+  # Add more IPs as needed
