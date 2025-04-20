@@ -1,0 +1,30 @@
+---
+# configure.yml
+- name: Ensure BIND configuration directory exists
+  file:
+    path: "/etc/named"
+    state: directory
+
+- name: Copy DNS zone file to the correct directory
+  template:
+    src: "templates/named-zone.j2"
+    dest: "{{ zone_file }}"
+    owner: root
+    group: named
+    mode: '0644'
+
+- name: Copy reverse DNS zone file to the correct directory
+  template:
+    src: "templates/named-zone-rev.j2"
+    dest: "{{ reverse_zone_file }}"
+    owner: root
+    group: named
+    mode: '0644'
+
+- name: Configure named.conf
+  template:
+    src: "templates/named.conf.j2"
+    dest: "/etc/named.conf"
+    owner: root
+    group: named
+    mode: '0644'

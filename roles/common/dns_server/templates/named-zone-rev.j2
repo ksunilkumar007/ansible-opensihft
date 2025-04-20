@@ -10,6 +10,10 @@ $TTL 86400
     IN  NS  ns1.{{ reverse_zone }}.
     IN  NS  ns2.{{ reverse_zone }}.
 
+; A records for name servers
+ns1.{{ reverse_zone }}.  IN  A  {{ ns1_ip }}
+ns2.{{ reverse_zone }}.  IN  A  {{ ns2_ip }}
+
 ; PTR records for reverse lookup
 {% for ip, fqdn in reverse_records.items() %}
 {{ ip }} IN PTR {{ fqdn }}.

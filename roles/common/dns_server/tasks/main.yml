@@ -1,0 +1,16 @@
+---
+- name: Install DNS Server packages
+  include_tasks: install.yml
+
+- name: Configure DNS server
+  include_tasks: configure.yml
+
+- name: Open DNS port on firewall
+  include_tasks: firewall.yml
+
+- name: Set /etc/resolv.conf with DNS server
+  include_tasks: set_resolv_conf.yml
+
+- name: Ensure DNS service is running
+  include_tasks: service.yml
+

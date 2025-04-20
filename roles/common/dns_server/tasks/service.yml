@@ -1,0 +1,7 @@
+---
+# service.yml
+- name: Start and enable the DNS service
+  systemd:
+    name: named
+    state: started
+    enabled: true

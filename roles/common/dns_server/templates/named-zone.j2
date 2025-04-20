@@ -1,6 +1,6 @@
 $TTL 86400
 @   IN  SOA  ns1.{{ zone_name }}. admin.{{ zone_name }}. (
-        20220101  ; Serial
+        {{ lookup('pipe', 'date +%Y%m%d') }}01 ; Serial (auto-generated)
         3600      ; Refresh
         1800      ; Retry
         1209600   ; Expire

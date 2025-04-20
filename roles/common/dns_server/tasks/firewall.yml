@@ -1,0 +1,11 @@
+---
+# firewall.yml
+- name: Open port 53 for DNS
+  ansible.builtin.firewalld:
+    port: 53/tcp
+    permanent: true
+    state: enabled
+
+- name: Reload the firewall to apply changes
+  ansible.builtin.command:
+    cmd: firewall-cmd --reload
